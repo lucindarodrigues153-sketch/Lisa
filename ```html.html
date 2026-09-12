@@ -1,0 +1,453 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para a Jéssica ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(255,100,150,.15), transparent 30%),
+                linear-gradient(135deg, #16001f, #3b092f, #170019);
+
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Fundo com estrelas */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: .7;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: .2; transform: scale(.7); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Corações */
+        .heart {
+            position: fixed;
+            bottom: -40px;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .8;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: .8;
+            }
+
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        /* Ecrã inicial */
+        .intro {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .small-heart {
+            font-size: 60px;
+            animation: heartbeat 1.5s infinite;
+            filter: drop-shadow(0 0 20px rgba(255,80,150,.8));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: clamp(42px, 8vw, 75px);
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            margin-top: 15px;
+            font-family: Arial, sans-serif;
+            color: #ffd8e8;
+            font-size: 17px;
+        }
+
+        .open-button {
+            margin-top: 40px;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4f91, #ff78aa);
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,60,130,.35);
+            transition: .3s;
+        }
+
+        .open-button:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 15px 40px rgba(255,60,130,.5);
+        }
+
+        /* Carta */
+        .letter-section {
+            display: none;
+            animation: appear 1.2s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter {
+            position: relative;
+            padding: clamp(30px, 6vw, 60px);
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,.96),
+                    rgba(255,245,249,.96)
+                );
+
+            color: #351527;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.45),
+                0 0 50px rgba(255,100,160,.15);
+        }
+
+        .letter::before {
+            content: "♥";
+            position: absolute;
+            top: 18px;
+            right: 25px;
+            font-size: 25px;
+            color: #ff6c9f;
+            opacity: .6;
+        }
+
+        .letter h2 {
+            color: #d63c75;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .letter p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #d63c75;
+            font-weight: bold;
+        }
+
+        .signature {
+            margin-top: 35px;
+            text-align: right;
+            font-size: 22px;
+            font-style: italic;
+            color: #d63c75;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: #e76b98;
+            margin: 25px 0;
+        }
+
+        .final-message {
+            margin-top: 40px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .final-message span {
+            display: block;
+            margin-top: 10px;
+            font-size: 25px;
+            color: #e74780;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255,255,255,.55);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 14px;
+            }
+
+            .letter {
+                padding: 28px 22px;
+            }
+
+            .letter p {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+
+        <!-- INTRO -->
+        <section class="intro" id="intro">
+
+            <div class="small-heart">❤️</div>
+
+            <h1>Para a Jéssica</h1>
+
+            <p class="subtitle">
+                Há uma coisa que já queria dizer há algum tempo...
+            </p>
+
+            <button class="open-button" onclick="openLetter()">
+                Abrir a carta 💌
+            </button>
+
+        </section>
+
+
+        <!-- CARTA -->
+        <section class="letter-section" id="letterSection">
+
+            <div class="letter">
+
+                <h2>Olá, Jéssica ❤️</h2>
+
+                <div class="divider"></div>
+
+                <p>
+                    Sei que já poderia ter-te contado isto há algum tempo,
+                    mas nunca tive coragem suficiente para o fazer.
+                    A verdade é que tive vergonha e não sabia bem como te dizer.
+                </p>
+
+                <p>
+                    Sei que talvez gostes de outra pessoa — ou pelo menos
+                    é isso que eu acho — mas mesmo assim sempre quis tentar
+                    dizer-te aquilo que sinto.
+                </p>
+
+                <p>
+                    Talvez já saibas quem sou...
+                    <span class="highlight">sou o Lisandro, primo da Lara.</span>
+                </p>
+
+                <p>
+                    Gosto de ti <span class="highlight">há bastante tempo</span>,
+                    e já não conseguia guardar isto só para mim.
+                    Não estou a dizer isto como uma brincadeira,
+                    nem quero que leves isto na brincadeira.
+                </p>
+
+                <p>
+                    Queria mesmo que levasses estas palavras a sério,
+                    porque estou a ser completamente sincero contigo.
+                </p>
+
+                <p>
+                    Posso dizer-te que sou inteligente,
+                    um bocado preguiçoso às vezes 😅,
+                    mas acima de tudo acho que sou uma boa pessoa
+                    e tento tratar bem quem é importante para mim.
+                </p>
+
+                <p>
+                    Não sei qual vai ser a tua resposta,
+                    e sinceramente tenho algum medo dela.
+                    Mas prefiro finalmente dizer-te a verdade
+                    do que continuar a escondê-la.
+                </p>
+
+                <p>
+                    Se não sentires o mesmo, eu vou respeitar.
+                    Não quero que te sintas pressionada a responder
+                    de uma determinada maneira.
+                </p>
+
+                <p>
+                    Só queria que soubesses o que sinto.
+                </p>
+
+                <div class="final-message">
+                    Obrigado por leres até ao fim.
+
+                    <span>❤️</span>
+                </div>
+
+                <div class="signature">
+                    Com carinho,<br>
+                    Lisandro
+                </div>
+
+            </div>
+
+            <div class="footer">
+                Feito com sinceridade. ❤️
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        // Criar estrelas
+        const stars = document.getElementById("stars");
+
+        for (let i = 0; i < 90; i++) {
+
+            const star = document.createElement("div");
+
+            star.classList.add("star");
+
+            star.style.left = Math.random() * 100 + "%";
+            star.style.top = Math.random() * 100 + "%";
+
+            star.style.animationDelay =
+                Math.random() * 3 + "s";
+
+            star.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            stars.appendChild(star);
+        }
+
+
+        // Abrir carta
+        function openLetter() {
+
+            document.getElementById("intro").style.display = "none";
+
+            document.getElementById("letterSection").style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            // Criar muitos corações ao abrir
+            for (let i = 0; i < 25; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+
+        // Criar coração flutuante
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("heart");
+
+            const hearts = ["❤️", "💗", "💕", "💖", "💓"];
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                (14 + Math.random() * 22) + "px";
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 6) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 12000);
+        }
+
+
+        // Corações ocasionais
+        setInterval(() => {
+
+            if (document.getElementById("letterSection").style.display === "block") {
+                createHeart();
+            }
+
+        }, 1200);
+
+    </script>
+
+</body>
+</html>
+```
